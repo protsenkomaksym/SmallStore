@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    @await Component.InvokeAsync("ClientsList")
+    
+    <hr />
+
+    Create product
+    <br />
+    <form asp-controller="Home" asp-action="Index" method="post">
+        Name: <input type="text" name="name" id="name" />
+        <br />
+        Stock: <input type="text" name="stock" id="stock" />
+        <br />
+        Price: <input type="text" name="price" id="price" />
+        <br />
+        <input type="submit" class="btn btn-primary" value="Create product"/>
+    </form>
+</div>
