@@ -70,5 +70,32 @@ namespace BusinessLayer
 
             _storeData.CreateProduct(product);
         }
+
+        public List<ProductClientDto> GetAllTransactions()
+        {
+            List<ProductClient> productClient = _storeData.GetAllTransactions();
+            List<ProductClientDto> productsDto = new List<ProductClientDto>();
+
+            if (productClient != null && productClient.Count > 0)
+            {
+                foreach (ProductClient p in productClient)
+                {
+                    ProductClientDto productClientDto = new ProductClientDto();
+
+                    productClientDto.Id = p.Id;
+                    productClientDto.IdProduct = p.IdProduct;
+                    productClientDto.IdClient = p.IdClient;
+                    productClientDto.Quantity = p.Quantity;
+                    productClientDto.totalPrice = p.totalPrice;
+                    productClientDto.Created = p.Created;
+                    productClientDto.FullName = p.IdClientNavigation.FullName;
+                    productClientDto.ProductName = p.IdProductNavigation.Name;
+
+                    productsDto.Add(productClientDto);
+                }
+            }
+
+            return productsDto;
+        }
     }
 }

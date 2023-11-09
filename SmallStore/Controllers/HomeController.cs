@@ -40,6 +40,13 @@ namespace SmallStore.Controllers
             return View();
         }
 
+        [HttpGet]
+        public JsonResult GetAllTransactions()
+        {
+            List<ProductClientDto> transactions = _storeBusiness.GetAllTransactions();
+            return Json(transactions);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

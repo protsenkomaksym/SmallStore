@@ -17,7 +17,7 @@ declare @name varchar(50)
 while @i < 15
 begin
 
-	set @name = CONCAT('Client-', FLOOR(rand()*10000))
+	set @name = CONCAT('Product-', FLOOR(rand()*10000))
 	insert into #product select @name,  FLOOR(rand()*25), rand()*25
 
 	set @i = @i + 1

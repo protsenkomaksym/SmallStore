@@ -2,7 +2,77 @@
     ViewData["Title"] = "Home Page";
 }
 
+@section Scripts{
+    <script>
+        var table = null;
+        $(document).ready(function () {
+            table = $('#tblProductClient').DataTable({
+                columns: [
+                    { title: "id", data: "id" },
+                    { title: "idProduct", data: "idProduct" },
+                    { title: "idClient", data: "idClient" },
+                    { title: "quantity", data: "quantity" },
+                    { title: "totalPrice", data: "totalPrice" },
+                    { title: "created", data: "created" },
+                    { title: "fullName", data: "fullName" },
+                    { title: "productName", data: "productName" }
+                ]
+                /*columnDefs: [
+                    { targets: 0, name: "id", visible: true }
+                ]*/
+            });
+
+            LoadTransactions();
+
+        });
+
+        function LoadTransactions() {
+            $.ajax('/Home/GetAllTransactions', {
+                method: "GET",
+                /*contentType: 'application/json; charset=utf-8',
+                dataType: 'json',*/
+                /*data: { sessionId: sessionId }*/
+            })
+                .done(function (d) {
+                    //alert("success");
+                    /*$(d.sessionRecordData).each(function (x, value) {
+                        $("body").append("<div class='mousePoint' style='left: " + value.x + "px; top: " + value.y + "px'></div>")
+                    });
+
+                    $("#totalPoints").text(d.totalPoints);*/
+
+                    table.clear();
+                    var json = d;  // { "id": "11" }
+                    table.rows.add(json);
+                    table.draw();
+
+                })
+                .fail(function () {
+                    alert("error");
+                })
+                .always(function () {
+                    
+                });
+        }
+    </script>
+}
+
 <div class="text-center">
+    <div class="row">
+        <div class="col-12">
+            <table id="tblProductClient" class="stripe">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr />
+    <br />
+    <br />
+    <br />
     <div class="row">
         <div class="col-sm-6">
             @await Component.InvokeAsync("ClientsList")
@@ -11,7 +81,7 @@
             @await Component.InvokeAsync("ProductsList")
         </div>
     </div>
-   
+
     <hr />
 
     Create product
@@ -23,6 +93,6 @@
         <br />
         Price: <input type="text" name="price" id="price" />
         <br />
-        <input type="submit" class="btn btn-primary" value="Create product"/>
+        <input type="submit" class="btn btn-primary" value="Create product" />
     </form>
 </div>

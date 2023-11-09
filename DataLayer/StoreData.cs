@@ -27,6 +27,12 @@ namespace DataLayer
             return await _context.Products.ToListAsync();
         }
 
+        public List<ProductClient> GetAllTransactions()
+        {
+            return _context.ProductClients
+                .Include(x => x.IdClientNavigation)
+                .Include(x => x.IdProductNavigation).ToList();
+        }
 
         public void CreateProduct(Product p)
         {
