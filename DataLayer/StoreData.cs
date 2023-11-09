@@ -22,6 +22,12 @@ namespace DataLayer
             return await _context.Clients.ToListAsync();
         }
 
+        public async Task<List<Product>> GetAllProducts()
+        {
+            return await _context.Products.ToListAsync();
+        }
+
+
         public void CreateProduct(Product p)
         {
             _context.Products.AddAsync(p);

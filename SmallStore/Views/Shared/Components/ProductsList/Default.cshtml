@@ -1,4 +1,4 @@
-﻿@model SmallStore.Models.ClientsListViewModel
+﻿@model SmallStore.Models.ProductsListViewModel
 @using BusinessLayer.Dtos
 
 @*
@@ -13,15 +13,19 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">FullName</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Price</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (ClientDto c in Model.Clients)
+                @foreach (ProductDto p in Model.Products)
                 {
                     <tr>
-                        <th scope="row">@c.Id</th>
-                        <td>@c.FullName</td>
+                        <th scope="row">@p.Id</th>
+                        <td>@p.Name</td>
+                        <td>@p.Stock</td>
+                        <td>@p.Price</td>
                     </tr>
                 }
             </tbody>

@@ -38,6 +38,27 @@ namespace BusinessLayer
             return clientsDto;
         }
 
+        public async Task<List<ProductDto>> GetAllProductsAsync()
+        {
+            List<Product> products = await _storeData.GetAllProducts();
+            List<ProductDto> productsDto = new List<ProductDto>();
+
+            if (products != null && products.Count > 0)
+            {
+                foreach (Product p in products)
+                {
+                    ProductDto productDto = new ProductDto();
+                    productDto.Id = p.Id;
+                    productDto.Name = p.Name;
+                    productDto.Stock = p.Stock;
+                    productDto.Price = p.Price;
+                    productsDto.Add(productDto);
+                }
+            }
+
+            return productsDto;
+        }
+
         public void CreateProduct(ProductDto p)
         {
             Product product = new Product()

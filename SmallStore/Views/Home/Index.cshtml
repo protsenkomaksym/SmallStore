@@ -3,8 +3,15 @@
 }
 
 <div class="text-center">
-    @await Component.InvokeAsync("ClientsList")
-    
+    <div class="row">
+        <div class="col-sm-6">
+            @await Component.InvokeAsync("ClientsList")
+        </div>
+        <div class="col-sm-6">
+            @await Component.InvokeAsync("ProductsList")
+        </div>
+    </div>
+   
     <hr />
 
     Create product
