@@ -35,6 +35,8 @@ namespace BusinessLayer
                 }
             }
 
+            SummaryData(clientsDto);
+
             return clientsDto;
         }
 
@@ -96,6 +98,22 @@ namespace BusinessLayer
             }
 
             return productsDto;
+        }
+
+        public void SummaryData(List<ClientDto> clients)
+        {
+            List<ProductClient> productClient = _storeData.GetAllTransactions();
+
+            // monto total gastado por cliente
+            var clientsAmount =
+                (from c in productClient
+                group c.totalPrice by c.IdClient into cGroup
+                select new { idClient = cGroup.Key, amount = cGroup.Sum() }).ToList();
+
+            clients.ForEach(c => {
+                var amount = clientsAmount.Where(x => x.idClient == c.Id).FirstOrDefault();
+                c.totalAmount = (amount == null) ? 0 : amount.amount;
+            });
         }
     }
 }

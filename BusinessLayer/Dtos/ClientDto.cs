@@ -10,6 +10,8 @@ namespace BusinessLayer.Dtos
 
         public string FullName { get; set; } = null!;
 
+        public decimal totalAmount { get; set; }
+
         public virtual ICollection<ProductClient> ProductClients { get; set; } = new List<ProductClient>();
     }
 }
