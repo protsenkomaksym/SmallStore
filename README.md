@@ -1,6 +1,6 @@
 # SmallStore
 
-Net Core 6, EF, ViewComponents 
+Net Core 6, EF, https://datatables.net/
 <br>
 
 Scaffold from simple DB <br>
